@@ -1,11 +1,24 @@
 import Page from '@/components/page'
 import Section from '@/components/section'
+import { useEffect } from 'react'
 
-const Story = () => (
+export default function Story() {
+	useEffect(() => {
+
+		const button = document.getElementById("clickableButton")
+		button?.addEventListener("click", () => {
+			Notification.requestPermission().then(perm => {
+				if (perm === "granted") {
+					new Notification("Hello")
+				}
+			})
+		})
+	})
+	return (
 	<Page>
 		<Section>
 			<h2 className='text-xl font-semibold'>Story</h2>
-
+			<button id="clickableButton" className="rounded p-2 m-2 bg-black text-slate-100">click me</button>
 			<div className='mt-2'>
 				<p className='text-zinc-600 dark:text-zinc-400'>
 					&quot;I confess that when this all started, you were like a picture
@@ -24,6 +37,6 @@ const Story = () => (
 			</div>
 		</Section>
 	</Page>
-)
 
-export default Story
+	)
+}
